@@ -1,5 +1,9 @@
 import { defineTool, type ToolRunContext } from '@deepseek-ai/dsh-tools'
 
+function errPrefix(name: string) {
+  return `promql-${name}:`
+}
+
 interface InstantQueryArgs {
   query: string
   time?: string
@@ -7,51 +11,6 @@ interface InstantQueryArgs {
   limit?: number
   lookback_delta?: string
   stats?: string
-}
-
-interface RangeQueryArgs {
-  query: string
-  start: string
-  end: string
-  step: string
-  timeout?: string
-  limit?: number
-  lookback_delta?: string
-  stats?: string
-}
-
-interface FormatQueryArgs {
-  query: string
-}
-
-interface ParseQueryArgs {
-  query: string
-}
-
-interface SeriesArgs {
-  match: string[]
-  start?: string
-  end?: string
-  limit?: number
-}
-
-interface LabelsArgs {
-  start?: string
-  end?: string
-  match?: string[]
-  limit?: number
-}
-
-interface LabelValuesArgs {
-  labelName: string
-  start?: string
-  end?: string
-  match?: string[]
-  limit?: number
-}
-
-function errPrefix(name: string) {
-  return `promql-${name}:`
 }
 
 export function createPromqlQueryTool(endpoint: string) {
@@ -83,6 +42,17 @@ export function createPromqlQueryTool(endpoint: string) {
       return JSON.stringify(data)
     },
   })
+}
+
+interface RangeQueryArgs {
+  query: string
+  start: string
+  end: string
+  step: string
+  timeout?: string
+  limit?: number
+  lookback_delta?: string
+  stats?: string
 }
 
 export function createPromqlQueryRangeTool(endpoint: string) {
@@ -122,6 +92,10 @@ export function createPromqlQueryRangeTool(endpoint: string) {
   })
 }
 
+interface FormatQueryArgs {
+  query: string
+}
+
 export function createPromqlFormatQueryTool(endpoint: string) {
   return defineTool({
     name: 'promql-format-query',
@@ -143,6 +117,10 @@ export function createPromqlFormatQueryTool(endpoint: string) {
   })
 }
 
+interface ParseQueryArgs {
+  query: string
+}
+
 export function createPromqlParseQueryTool(endpoint: string) {
   return defineTool({
     name: 'promql-parse-query',
@@ -162,6 +140,13 @@ export function createPromqlParseQueryTool(endpoint: string) {
       return JSON.stringify(data)
     },
   })
+}
+
+interface SeriesArgs {
+  match: string[]
+  start?: string
+  end?: string
+  limit?: number
 }
 
 export function createPromqlSeriesTool(endpoint: string) {
@@ -199,6 +184,13 @@ export function createPromqlSeriesTool(endpoint: string) {
   })
 }
 
+interface LabelsArgs {
+  start?: string
+  end?: string
+  match?: string[]
+  limit?: number
+}
+
 export function createPromqlLabelsTool(endpoint: string) {
   return defineTool({
     name: 'promql-labels',
@@ -233,6 +225,14 @@ export function createPromqlLabelsTool(endpoint: string) {
       return JSON.stringify(data)
     },
   })
+}
+
+interface LabelValuesArgs {
+  labelName: string
+  start?: string
+  end?: string
+  match?: string[]
+  limit?: number
 }
 
 export function createPromqlLabelValuesTool(endpoint: string) {
