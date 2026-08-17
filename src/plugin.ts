@@ -1,6 +1,6 @@
 import type { Context } from '@deepseek-ai/cordis'
 import Schema from '@deepseek-ai/schemastery'
-import { createPromqlFormatQueryeTool, createPromqlQueryRangeTool, createPromqlQueryTool, createPromqlSeriesTool } from './promql'
+import { createPromqlFormatQueryTool, createPromqlQueryRangeTool, createPromqlQueryTool, createPromqlSeriesTool } from './promql'
 
 export const name = 'promql-plugin'
 export const inject = ['tools']
@@ -16,6 +16,6 @@ export const Config: Schema<Config> = Schema.object({
 export function apply(ctx: Context, config: Config) {
   ctx.tools.register(createPromqlQueryRangeTool(config.prometheusEndpoint))
   ctx.tools.register(createPromqlQueryTool(config.prometheusEndpoint))
-  ctx.tools.register(createPromqlFormatQueryeTool(config.prometheusEndpoint))
+  ctx.tools.register(createPromqlFormatQueryTool(config.prometheusEndpoint))
   ctx.tools.register(createPromqlSeriesTool(config.prometheusEndpoint))
 }
