@@ -61,7 +61,19 @@ export async function promRequest(endpoint: string, opts: RequestOptions): Promi
   }
 
   if (json) {
-    return JSON.stringify(await response.json())
+    let text = await response.text()
+    if (!text) {
+      // e.g. HTTP 204 No Content (admin clean_tombstones)
+      return JSON.stringify({ status: 'success', data: null })
+    }
+    try {
+      return JSON.stringify(JSON.parse(text))
+    } catch {
+      // Prometheus search API (--enable-feature=search-api) returns multiple
+      // concatenated JSON objects, not a single JSON document. Fall back to
+      // raw text so the agent can still read the content.
+      return text
+    }
   }
   return await response.text()
 }

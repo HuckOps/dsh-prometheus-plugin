@@ -108,16 +108,20 @@ export function createPromqlLabelValuesTool(endpoint: string) {
       render: (_args, value) => [{ type: 'text', text: String(value) }],
     },
     async execute(_args: LabelValuesArgs, _exec: ToolRunContext): Promise<string> {
-      const url = new URL(`/api/v1/label/${encodeURIComponent(_args.labelName)}/values`)
-      if (_args.start) url.searchParams.set('start', _args.start)
-      if (_args.end) url.searchParams.set('end', _args.end)
+      const params = new URLSearchParams()
+      if (_args.start) params.set('start', _args.start)
+      if (_args.end) params.set('end', _args.end)
       if (_args.match) {
         for (const matcher of _args.match) {
-          url.searchParams.append('match[]', matcher)
+          params.append('match[]', matcher)
         }
       }
-      if (_args.limit) url.searchParams.set('limit', String(_args.limit))
-      return promRequest(endpoint, { name: 'label-values', path: url.pathname + url.search })
+      if (_args.limit) params.set('limit', String(_args.limit))
+      return promRequest(endpoint, {
+        name: 'label-values',
+        path: `/api/v1/label/${encodeURIComponent(_args.labelName)}/values`,
+        params,
+      })
     },
   })
 }
