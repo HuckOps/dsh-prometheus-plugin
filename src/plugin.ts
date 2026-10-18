@@ -4,30 +4,30 @@ import {
   createPromqlAdminCleanTombstonesTool,
   createPromqlAdminDeleteSeriesTool,
   createPromqlAdminSnapshotTool,
-} from './admin'
+} from './admin.js'
 import {
   createPromqlLabelValuesTool,
   createPromqlLabelsTool,
   createPromqlMetadataTool,
   createPromqlSeriesTool,
-} from './metadata'
+} from './metadata.js'
 import {
   createPromqlFormatQueryTool,
   createPromqlParseQueryTool,
   createPromqlQueryExemplarsTool,
   createPromqlQueryRangeTool,
   createPromqlQueryTool,
-} from './query'
+} from './query.js'
 import {
   createPromqlAlertmanagersTool,
   createPromqlAlertsTool,
   createPromqlRulesTool,
-} from './rules'
+} from './rules.js'
 import {
   createPromqlSearchLabelNamesTool,
   createPromqlSearchLabelValuesTool,
   createPromqlSearchMetricNamesTool,
-} from './search'
+} from './search.js'
 import {
   createPromqlFeaturesTool,
   createPromqlStatusBuildInfoTool,
@@ -38,25 +38,25 @@ import {
   createPromqlStatusTsdbBlocksTool,
   createPromqlStatusTsdbTool,
   createPromqlStatusWalReplayTool,
-} from './status'
+} from './status.js'
 import {
   createPromqlScrapePoolsTool,
   createPromqlTargetsMetadataTool,
   createPromqlTargetsTool,
-} from './targets'
+} from './targets.js'
 
 export const name = 'dsh-prometheus-plugin'
 export const inject = ['tools']
 
-export interface Config {
+export interface PluginConfig {
   prometheusEndpoint: string
 }
 
-export const Config: Schema<Config> = Schema.object({
+export const Config: Schema<PluginConfig> = Schema.object({
   prometheusEndpoint: Schema.string().default('http://127.0.0.1:9090'),
 })
 
-export function apply(ctx: Context, config: Config) {
+export function apply(ctx: Context, config: PluginConfig) {
   const endpoint = config.prometheusEndpoint
 
   // Query
@@ -97,7 +97,6 @@ export function apply(ctx: Context, config: Config) {
   ctx.tools.register(createPromqlSearchMetricNamesTool(endpoint))
   ctx.tools.register(createPromqlSearchLabelNamesTool(endpoint))
   ctx.tools.register(createPromqlSearchLabelValuesTool(endpoint))
-
 
   // Admin (requires --web.enable-admin-api)
   ctx.tools.register(createPromqlAdminSnapshotTool(endpoint))

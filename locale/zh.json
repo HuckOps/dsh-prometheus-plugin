@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Prometheus PromQL",
+    "description": "将 Prometheus HTTP API 以 30 个 Agent 工具的形式暴露：查询、元数据、抓取目标、规则、告警、状态、搜索和管理端点。"
+  }
+}

@@ -1,5 +1,0 @@
-- insert:
-    - id: promql-plugin
-      name: '/home/huck/deepseek-harness/scratch-plugin/src/plugin.ts'
-      config:
-        prometheusEndpoint: http://127.0.0.1:9090

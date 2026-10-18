@@ -1,5 +1,5 @@
 import { defineTool, type ToolRunContext } from '@deepseek-ai/dsh-tools'
-import { promRequest } from './client'
+import { promRequest } from './client.js'
 
 interface SeriesArgs {
   match: string[]

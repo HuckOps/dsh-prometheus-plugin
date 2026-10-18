@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Prometheus PromQL",
+    "description": "Exposes the Prometheus HTTP API as 30 agent tools: queries, metadata, targets, rules, alerts, status, search, and admin endpoints."
+  }
+}

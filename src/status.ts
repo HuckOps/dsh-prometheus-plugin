@@ -1,4 +1,4 @@
-import { createSimpleGetTool } from './client'
+import { createSimpleGetTool } from './client.js'
 
 export const createPromqlStatusConfigTool = createSimpleGetTool(
   'promql-status-config',

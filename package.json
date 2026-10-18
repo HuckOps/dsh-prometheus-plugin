@@ -1,7 +1,8 @@
 {
-  "name": "scratch-plugin",
+  "name": "@local/dsh-prometheus-plugin",
   "version": "0.1.0",
-  "description": "PromQL plugin for dsh (experimental)",
+  "description": "PromQL plugin for dsh: exposes the Prometheus HTTP API as agent tools",
+  "private": true,
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -10,25 +11,33 @@
       "types": "./lib/types/index.d.ts",
       "default": "./lib/index.js"
     },
-    "./src/*": "./src/*",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
     "./package.json": "./package.json"
   },
   "files": [
     "lib/",
-    "cordis.yml"
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg"
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "postinstall": "tsc"
   },
   "license": "MIT",
-  "dependencies": {
-    "@deepseek-ai/cordis": "^4.0.1",
-    "@deepseek-ai/schemastery": "^3.18.1"
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/dsh-tools": "0.2.1-rc.2",
+    "@deepseek-ai/schemastery": "~3.18.5"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-tools": "^0.0.1-rc.1",
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/dsh-tools": "0.2.1-rc.2",
+    "@deepseek-ai/schemastery": "~3.18.5",
     "@types/node": "^22.0.0",
-    "typescript": "^6.0.3"
-  }
+    "typescript": "^5.0.0"
+  },
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
 }

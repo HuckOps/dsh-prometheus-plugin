@@ -1,0 +1,5 @@
+- insert:
+    - id: promql-plugin
+      name: '@local/dsh-prometheus-plugin'
+      config:
+        prometheusEndpoint: http://127.0.0.1:9090

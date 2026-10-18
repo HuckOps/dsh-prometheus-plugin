@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2024",
     "module": "ESNext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node10",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,

@@ -29,31 +29,41 @@ Prometheus HTTP API as a set of tools an LLM agent can call. Built on the
 
 ## Usage
 
-The plugin is loaded directly by `dsh` from its TypeScript source — no build
-step is required for local use. Add the following to your `dsh` `cordis.yml`
-(adjust the `name` path to where you cloned the repo):
+Install the bundle into your `dsh` profile:
+
+```bash
+git clone https://github.com/HuckOps/dsh-prometheus-plugin
+# In dsh (agent or Plugin Manager), install the bundle:
+# plugin_manager install_bundle /path/to/dsh-prometheus-plugin
+```
+
+The bundle declares `cordis.patch.yml`, which registers the `promql-plugin`
+entry with the package `@local/dsh-prometheus-plugin` (resolved via the
+`dsh.bundle.patch` field in `package.json`). No manual `cordis.yml` editing is
+needed.
+
+The patch ships a default config:
 
 ```yaml
 - insert:
     - id: promql-plugin
-      name: '/path/to/dsh-prometheus-plugin/src/plugin.ts'
+      name: '@local/dsh-prometheus-plugin'
       config:
         prometheusEndpoint: http://127.0.0.1:9090
 ```
 
-`prometheusEndpoint` defaults to `http://127.0.0.1:9090` when omitted.
+Edit the patch (or override the entry's config) to point at your Prometheus
+instance. `prometheusEndpoint` defaults to `http://127.0.0.1:9090` when omitted.
 
-To type-check / build the sources (e.g. before contributing):
+To build from source:
 
 ```bash
-npm install
-npm run build   # runs tsc, output to lib/
+npm install        # postinstall runs tsc, output to lib/
 ```
 
-> Note: `package.json` declares `main` as `lib/index.js`, but the package has no
-> `src/index.ts`. For `dsh` usage the entry is loaded directly via `cordis.yml`
-> (above), so a build is not required. If you intend to publish to npm, add an
-> `src/index.ts` that re-exports `apply` from `./plugin`.
+> Note: runtime dependencies (`@deepseek-ai/dsh-tools`, `@deepseek-ai/cordis`,
+> `@deepseek-ai/schemastery`) are declared as peer dependencies matching the
+> DSH host runtime; they are not bundled into the plugin.
 
 ## Tools
 
@@ -128,12 +138,17 @@ All tools are registered with the `promql-` prefix.
 
 ```
 .
-├── cordis.yml          # dsh plugin registration (local dev path)
-├── package.json
+├── cordis.patch.yml    # dsh bundle patch: registers the promql-plugin entry
+├── package.json        # bundle manifest (dsh.bundle.patch) + peer deps
+├── icon.svg            # bundle display icon
+├── locale/
+│   ├── en.json
+│   └── zh.json
 ├── tsconfig.json
 ├── README.md
 ├── LICENSE
 └── src/
+    ├── index.ts        # package entry: re-exports apply/inject/Config
     ├── client.ts       # shared HTTP client + error handling + timeout
     ├── query.ts        # query / query_range / format_query / parse_query / query_exemplars
     ├── metadata.ts     # series / labels / label_values / metadata

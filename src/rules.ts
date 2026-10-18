@@ -1,5 +1,5 @@
 import { defineTool, type ToolRunContext } from '@deepseek-ai/dsh-tools'
-import { promRequest, createSimpleGetTool } from './client'
+import { promRequest, createSimpleGetTool } from './client.js'
 
 interface RulesArgs {
   type?: string
