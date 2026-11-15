@@ -1,6 +1,6 @@
 {
   "name": "@huckops/dsh-prometheus-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PromQL plugin for dsh: exposes the Prometheus HTTP API as agent tools",
   "type": "module",
   "main": "lib/index.js",
@@ -52,5 +52,9 @@
     "@types/node": "^22.0.0",
     "typescript": "^5.0.0"
   },
-  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
 }
