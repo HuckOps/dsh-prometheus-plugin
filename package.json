@@ -1,5 +1,5 @@
 {
-  "name": "@huckops/dsh-prometheus-plugin",
+  "name": "@huck-ops/dsh-prometheus-plugin",
   "version": "0.1.1",
   "description": "PromQL plugin for dsh: exposes the Prometheus HTTP API as agent tools",
   "type": "module",
