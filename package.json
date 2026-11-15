@@ -1,8 +1,7 @@
 {
-  "name": "@local/dsh-prometheus-plugin",
+  "name": "@huckops/dsh-prometheus-plugin",
   "version": "0.1.0",
   "description": "PromQL plugin for dsh: exposes the Prometheus HTTP API as agent tools",
-  "private": true,
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -13,19 +12,33 @@
     },
     "./locale/*.json": "./locale/*.json",
     "./icon": "./icon.svg",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./src/*": "./src/*"
   },
   "files": [
     "lib/",
     "cordis.patch.yml",
     "locale/*.json",
-    "icon.svg"
+    "icon.svg",
+    "README.md"
   ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "postinstall": "tsc"
+    "prepare": "tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HuckOps/dsh-prometheus-plugin.git"
+  },
+  "keywords": [
+    "prometheus",
+    "promql",
+    "deepseek-harness",
+    "dsh",
+    "plugin",
+    "monitoring"
+  ],
   "license": "MIT",
   "peerDependencies": {
     "@deepseek-ai/cordis": "~4.0.5",
