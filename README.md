@@ -37,6 +37,14 @@ git clone https://github.com/HuckOps/dsh-prometheus-plugin
 # plugin_manager install_bundle /path/to/dsh-prometheus-plugin
 ```
 
+Or install directly from npm:
+
+```bash
+npm install @huckops/dsh-prometheus-plugin
+```
+
+npm package: https://www.npmjs.com/package/@huckops/dsh-prometheus-plugin
+
 The bundle declares `cordis.patch.yml`, which registers the `promql-plugin`
 entry with the package `@local/dsh-prometheus-plugin` (resolved via the
 `dsh.bundle.patch` field in `package.json`). No manual `cordis.yml` editing is
